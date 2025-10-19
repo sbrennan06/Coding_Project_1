@@ -47,6 +47,7 @@ const required = ['username', 'email', 'comments'];
 form.addEventListener('submit', (e) => {
     document.querySelectorAll('.error-text').forEach(el => el.remove());
     let valid = true;
+    if (!valid) e.preventDefault();
 
 
 required.forEach(id => {
@@ -92,4 +93,20 @@ form.addEventListener('submit', (e) => {
 });
 
 //Step 4: Use event bubbling & delegation to manage events of all input fields
+form.addEventListener('input', (e) => {
+    const t = e.target;
+    if (e.target.matches('#username, #email, #comments, textarea, input')) {
+        e.stopPropagation();
+    }
+    });
+
+    form.addEventListener('input', (e) => {
+        const t = e.target;
+        if (!t.matches('#username, #email, #comments')) return;
+        const next = t.nextElementSibling;
+        if (next && next.classList && next.classList.contains('error-text')) {
+        next.remove();
+    }
+})
+
 //Step 5: Prevent background clicks
