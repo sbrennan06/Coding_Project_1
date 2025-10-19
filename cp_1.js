@@ -47,7 +47,6 @@ const required = ['username', 'email', 'comments'];
 form.addEventListener('submit', (e) => {
     document.querySelectorAll('.error-text').forEach(el => el.remove());
     let valid = true;
-    if (!valid) e.preventDefault();
 
 
 required.forEach(id => {
@@ -62,21 +61,24 @@ required.forEach(id => {
         field.insertAdjacentElement('afterend', errorMessage);
     }
     });
-    if (!valid) e.preventDefault();
-})
+    if (!valid) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return;
+}
+});
 
 //step 3.4: append valid feedback entries to a container
 
 const feedbackDisplay = document.getElementById('feedback-display');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    document.querySelectorAll('.error-text').forEach(el => el.remove());
+    if (document.querySelectorAll('.error-text').forEach(el => el.remove()));
     const username = document.getElementById('username').value.trim();
     const email = document.getElementById('email').value.trim();
     const commentsValue = comments.value.trim();
 
     if (!username || !email || !commentsValue) {
-        alert('Please complete all fields to submit.');
         return;
     }
     
@@ -93,8 +95,7 @@ form.addEventListener('submit', (e) => {
 });
 
 //Step 4: Use event bubbling & delegation to manage events of all input fields
-form.addEventListener('input', (e) => {
-    const t = e.target;
+form.addEventListener('click', (e) => {
     if (e.target.matches('#username, #email, #comments, textarea, input')) {
         e.stopPropagation();
     }
@@ -106,7 +107,5 @@ form.addEventListener('input', (e) => {
         const next = t.nextElementSibling;
         if (next && next.classList && next.classList.contains('error-text')) {
         next.remove();
-    }
-})
-
-//Step 5: Prevent background clicks
+    };
+});
