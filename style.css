@@ -5,3 +5,8 @@ body {
 label {
     display: inline-block; width:240px;
 }
+
+#comments-count {
+    display: block; width: 320px; margin-top: 4px; color: #777; 
+    font-size: 0.9rem;
+}
