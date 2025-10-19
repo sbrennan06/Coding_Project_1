@@ -40,6 +40,30 @@ fields.forEach((field) => {
     });
 })
 
+//step 3.3: prevent submission if fields are empty & show validation messages
+const form = document.getElementById('feedback-form');
+const required = ['username', 'email', 'comments'];
+
+form.addEventListener('submit', (e) => {
+    document.querySelectorAll('.error-text').forEach(el => el.remove());
+    let valid = true;
+
+
+required.forEach(id => {
+    const field = document.getElementById(id);
+    if (!field.value.trim()) {
+        valid = false;
+        const errorMessage = document.createElement('span');
+        errorMessage.className = 'error-text';
+        errorMessage.textContent = 'Required';
+        errorMessage.style.color = '#b00020';
+        errorMessage.style.fontSize = '0.9rem';
+        field.insertAdjacentElement('afterend', errorMessage);
+    }
+    });
+    if (!valid) e.preventDefault();
+})
+
 
 //Step 4: Use evetn bubbling & delegation to manage events of all input fields
 //Step 5: Prevent background clicks
