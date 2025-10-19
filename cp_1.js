@@ -64,6 +64,32 @@ required.forEach(id => {
     if (!valid) e.preventDefault();
 })
 
+//step 3.4: append valid feedback entries to a container
 
-//Step 4: Use evetn bubbling & delegation to manage events of all input fields
+const feedbackDisplay = document.getElementById('feedback-display');
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.querySelectorAll('.error-text').forEach(el => el.remove());
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const commentsValue = comments.value.trim();
+
+    if (!username || !email || !commentsValue) {
+        alert('Please complete all fields to submit.');
+        return;
+    }
+    
+    const entry = document.createElement('div');
+    entry.className = 'feedback-entry';
+
+    entry.innerHTML = `
+    <hr><p><strong>${username}</strong></p>
+    <p>${email}</p>
+    <p>${commentsValue}</p><hr>`;
+
+    feedbackDisplay.appendChild(entry);
+    counter.textContent = 'Characters: 0';
+});
+
+//Step 4: Use event bubbling & delegation to manage events of all input fields
 //Step 5: Prevent background clicks
