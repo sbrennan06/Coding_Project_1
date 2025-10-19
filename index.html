@@ -9,12 +9,15 @@
 <body>
     <h1>Feedback Form</h1>
     <form id="feedback-form" action="">
-        <input id="username" type="text" placeholder="Username"><br>
-        <input id="email" type="email" name="email" placeholder="Email"><br>
-        <textarea id="comments" name="comments" placeholder="Your Feedback Here"></textarea><br>
+        <label for="username">Username: </label>
+        <input id="username" name="Username" type="text" placeholder="Enter Username"><br>
+        <label for="email">Email Address: </label>
+        <input id="email" type="email" name="email" placeholder="Enter Email Address"><br>
+        <label for="comments">Feedback Comments: </label>
+        <textarea id="comments" name="comments" rows="4" placeholder="Enter your Feedback Here"></textarea><br>
         <button id="submit-btn" name="submit-btn" type="submit">Submit</button><br>
     </form>
-    
+    <div id="feedback-display"></div>
     
 
     <script src="cp_1.js"></script>
